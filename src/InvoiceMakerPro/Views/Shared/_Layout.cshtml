@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2016.2.504/styles/kendo.common.min.css" />
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2016.2.504/styles/kendo.metro.min.css" />
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2016.2.504/styles/kendo.dataviz.min.css" />
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2016.2.504/styles/kendo.dataviz.bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css" asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"/>
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2016.2.504/styles/kendo.common.min.css" asp-fallback-href="~/lib/kendo/css/kendo.common.min.css"/>
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2016.2.504/styles/kendo.metro.min.css" asp-fallback-href="~/lib/kendo/css/kendo.common.min.css"/>
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2016.2.504/styles/kendo.dataviz.min.css" asp-fallback-href="~/lib/kendo/css/kendo.common.min.css"/>
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2016.2.504/styles/kendo.dataviz.bootstrap.min.css" asp-fallback-href="~/lib/kendo/css/kendo.common.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">   
+        <link rel="stylesheet" href="~/css/site-bundle.min.css"  asp-append-version="true"/>
+    </environment>
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="http://cdn.kendostatic.com/2016.2.504/js/kendo.all.min.js"></script>
+        <script src="http://cdn.kendostatic.com/2016.2.504/js/kendo.timezones.min.js"></script>
+        <script src="http://cdn.kendostatic.com/2016.2.504/js/kendo.aspnetmvc.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/gridtabbing.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js" asp-fallback-src="~/lib/jquery/dist/jquery.min.js" asp-fallback-test="window.jQuery"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js" asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>
+        <script src="http://cdn.kendostatic.com/2016.2.504/js/kendo.all.min.js" asp-fallback-src="~/lib/kendo/js/kendo.all.min.js"></script>
+        <script src="http://cdn.kendostatic.com/2016.2.504/js/kendo.timezones.min.js" asp-fallback-src="~/lib/kendo/js/kendo.timezones.min.js"></script>
+        <script src="http://cdn.kendostatic.com/2016.2.504/js/kendo.aspnetmvc.min.js" asp-fallback-src="~/lib/kendo/js/kendo.aspnetmvc.min.js"></script>
+        <script src="~/js/site-bundle.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+</head>
+<body>
+<div class="container body-content" id="mainContent">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="margin-top" style="height: 65px;">
+            <div class="left-align">
+                <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" class="minus-margin-top"/></a>
+            </div>
+                @Html.Partial("_LoginPartial")
+        </div>
+
+        <ul id="menu" class="margin-top">
+            <li id="InvoicesMenuLink">
+                <a href="~/">My Invoices</a>
+            </li>
+            <li id="CustomerMenuLink">@Html.ActionLink("Customers", "Index", "Customers")</li>
+            <li id="StoreMenuLink">@Html.ActionLink("Stores", "Index", "Stores")</li>
+            <li id="ArticleMenuLink">@Html.ActionLink("My Supplies", "Index", "Supplies")</li>
+        </ul>
+
+    }
+    @RenderBody()
+
+    <hr/>
+    <footer>
+        <p>&copy; 2016 - Invoice Maker Pro</p>
+    </footer>
+</div>
+@RenderSection("scripts", required: false)
+</body>
+</html>

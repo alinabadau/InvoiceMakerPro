@@ -1,0 +1,12 @@
+@model Article
+@(Html.Kendo().ComboBoxFor(m=>m)
+      .DataValueField("ArticleId")
+      .DataTextField("Name")
+      .Filter(FilterType.Contains)
+      .Events(e=>e
+      .Change("onChangeArticle"))
+      .DataSource(ds => ds.Ajax()
+          .Read(read => read.Action("GetArticles", "Supplies")
+          )))
+
+
